@@ -1,5 +1,5 @@
 # Build Geth in a stock Go builder container
-FROM golang:1.18-alpine as builder
+FROM golang:1.18-alpine3.15 as builder
 
 ENV MEV_GETH_VERSION="1.10.17-mev0.6.1"
 
@@ -10,7 +10,7 @@ RUN apk add --no-cache gcc musl-dev linux-headers git && \
     cd mev-geth && go run build/ci.go install ./cmd/geth
 
 # Pull MEV-Geth into a second stage deploy alpine container
-FROM alpine:latest
+FROM alpine:3.15
 
 RUN apk add --no-cache ca-certificates
 COPY --from=builder /build/mev-geth/build/bin/geth /usr/local/bin/
