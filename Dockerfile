@@ -1,5 +1,5 @@
 # Build Geth in a stock Go builder container
-FROM golang:1.18-alpine3.15 as builder
+FROM golang:1.19-alpine3.15 as builder
 
 ENV MEV_GETH_VERSION="v1.11.5-mev0.7.0"
 
